@@ -2,6 +2,8 @@
     .SYNOPSIS
         This script will check Active Directory for specified account passwords that are due to expire in the next 14 days.
         Helpful for service accounts
+        Requires the Emailimo module as well as the AD module installed.
+        https://github.com/EvotecIT/Emailimo
     .EXAMPLE
         ServiceAccountExpirationReminder.ps1 -EmailTo "it@contoso.com" -EmailFrom "it@contoso.com" -SMTP "mail.contoso.com" -SMTPPort 25 -Accounts "svc_citrixpvs","svc_citrixwem" -PasswordExpiryDays 90
 #>
