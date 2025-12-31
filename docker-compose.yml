@@ -1,0 +1,7 @@
+services:
+  resume-website:
+    build: .
+    container_name: tylermiranda-dot-com
+    ports:
+      - "1338:1337"
+    restart: unless-stopped
