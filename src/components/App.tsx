@@ -1,4 +1,5 @@
 import { Desktop } from './Desktop';
+import { MobileLayout } from './MobileLayout';
 import { WelcomeTerminal } from './WelcomeTerminal';
 import { AboutContent } from './AboutContent';
 import { ProjectsContent } from './ProjectsContent';
@@ -17,5 +18,16 @@ const windowContents: Record<WindowId, React.ReactNode> = {
 };
 
 export function App() {
-  return <Desktop windowContents={windowContents} />;
+  return (
+    <>
+      {/* Desktop layout - visible on md screens and up */}
+      <div className="hidden md:block">
+        <Desktop windowContents={windowContents} />
+      </div>
+      {/* Mobile layout - visible on screens smaller than md */}
+      <div className="md:hidden">
+        <MobileLayout windowContents={windowContents} />
+      </div>
+    </>
+  );
 }
