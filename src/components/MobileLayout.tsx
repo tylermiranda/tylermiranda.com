@@ -22,11 +22,12 @@ export function MobileLayout({ windowContents }: MobileLayoutProps) {
 
   return (
     <div className="min-h-screen bg-[#7ec850] flex flex-col">
-      {/* Zelda-style background */}
+      {/* Background dot pattern */}
       <div
-        className="fixed inset-0 pointer-events-none bg-cover bg-center bg-no-repeat"
+        className="fixed inset-0 pointer-events-none"
         style={{
-          backgroundImage: `url("/background.jpg")`,
+          backgroundImage: `radial-gradient(circle, #6ab344 1px, transparent 1px)`,
+          backgroundSize: '24px 24px',
         }}
       />
 

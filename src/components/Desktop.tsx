@@ -28,11 +28,12 @@ export function Desktop({ windowContents }: DesktopProps) {
 
   return (
     <div className="h-screen bg-[#f5d89a] relative overflow-hidden">
-      {/* Background illustration */}
+      {/* Background dot pattern */}
       <div
-        className="absolute inset-0 bg-cover bg-right-bottom bg-no-repeat"
+        className="absolute inset-0"
         style={{
-          backgroundImage: `url("/background.jpg")`,
+          backgroundImage: `radial-gradient(circle, #d4c4a0 1px, transparent 1px)`,
+          backgroundSize: '24px 24px',
         }}
       />
 
