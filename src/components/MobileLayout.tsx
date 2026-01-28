@@ -21,15 +21,7 @@ export function MobileLayout({ windowContents }: MobileLayoutProps) {
   const activeWindowData = windows.find(w => w.id === activeWindow);
 
   return (
-    <div className="min-h-screen bg-[#7ec850] flex flex-col">
-      {/* Background dot pattern */}
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `radial-gradient(circle, #6ab344 1px, transparent 1px)`,
-          backgroundSize: '24px 24px',
-        }}
-      />
+    <div className="min-h-screen bg-black flex flex-col">
 
       {/* Window - fullscreen style */}
       <div className="flex-1 p-2 pb-16 relative z-10">

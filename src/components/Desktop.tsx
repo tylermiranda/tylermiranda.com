@@ -27,15 +27,7 @@ export function Desktop({ windowContents }: DesktopProps) {
   }, []);
 
   return (
-    <div className="h-screen bg-[#f5d89a] relative overflow-hidden">
-      {/* Background dot pattern */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `radial-gradient(circle, #d4c4a0 1px, transparent 1px)`,
-          backgroundSize: '24px 24px',
-        }}
-      />
+    <div className="h-screen bg-black relative overflow-hidden">
 
       {/* Desktop Icons */}
       <div className="absolute top-4 left-4 flex flex-col gap-2">
