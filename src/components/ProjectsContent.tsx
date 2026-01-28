@@ -17,7 +17,14 @@ export function ProjectsContent() {
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center gap-2">
                 <span>📦</span>
-                <h3 className="font-bold text-gray-900">{project.name}</h3>
+                <a
+                  href={project.url || project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-gray-900 hover:text-amber-600 transition-colors"
+                >
+                  {project.name}
+                </a>
               </div>
               <div className="flex gap-2">
                 {project.github && (
