@@ -21,6 +21,10 @@ const { title = 'TylerOS' } = Astro.props;
   </body>
 </html>
 
+<script>
+  document.addEventListener('contextmenu', (e) => e.preventDefault());
+</script>
+
 <style is:global>
   @import '../styles/global.css';
 </style>
