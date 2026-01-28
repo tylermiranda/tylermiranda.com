@@ -21,13 +21,12 @@ export function MobileLayout({ windowContents }: MobileLayoutProps) {
   const activeWindowData = windows.find(w => w.id === activeWindow);
 
   return (
-    <div className="min-h-screen bg-cream flex flex-col">
-      {/* Desktop-style background pattern */}
+    <div className="min-h-screen bg-[#7ec850] flex flex-col">
+      {/* Zelda-style background */}
       <div
-        className="fixed inset-0 pointer-events-none opacity-30"
+        className="fixed inset-0 pointer-events-none bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `radial-gradient(circle, #9ca3af 1px, transparent 1px)`,
-          backgroundSize: '24px 24px',
+          backgroundImage: `url("/background.jpg")`,
         }}
       />
 
