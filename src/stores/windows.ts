@@ -113,3 +113,11 @@ export function updateWindowPosition(id: WindowId, position: { x: number; y: num
     [id]: { ...current[id], position },
   });
 }
+
+export function updateWindowSize(id: WindowId, size: { width: number; height: number }) {
+  const current = windows.get();
+  windows.set({
+    ...current,
+    [id]: { ...current[id], size },
+  });
+}
