@@ -48,8 +48,8 @@ const defaultWindows: Record<WindowId, Omit<WindowState, 'isOpen' | 'isMinimized
     id: 'trash',
     title: 'trash/',
     route: '/trash',
-    position: { x: 300, y: 150 },
-    size: { width: 500, height: 450 },
+    position: { x: 200, y: 80 },
+    size: { width: 700, height: 550 },
   },
 };
 
