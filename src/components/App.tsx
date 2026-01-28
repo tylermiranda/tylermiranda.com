@@ -1,0 +1,16 @@
+import { Desktop } from './Desktop';
+import { WelcomeTerminal } from './WelcomeTerminal';
+import type { WindowId } from '../types/window';
+
+const windowContents: Record<WindowId, React.ReactNode> = {
+  welcome: <WelcomeTerminal />,
+  about: <div className="p-4 prose">About content coming soon...</div>,
+  projects: <div className="p-4 prose">Projects content coming soon...</div>,
+  skills: <div className="p-4 prose">Skills content coming soon...</div>,
+  resume: <div className="p-4 prose">Resume content coming soon...</div>,
+  contact: <div className="p-4 prose">Contact content coming soon...</div>,
+};
+
+export function App() {
+  return <Desktop windowContents={windowContents} />;
+}

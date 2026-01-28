@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { App } from '../components/App';
 ---
 
-<BaseLayout title="TylerOS">
-  <main class="h-screen bg-cream flex items-center justify-center">
-    <h1 class="text-4xl font-bold text-gray-900">TylerOS</h1>
-  </main>
+<BaseLayout title="TylerOS | Tyler Miranda">
+  <App client:load />
 </BaseLayout>
