@@ -44,6 +44,13 @@ const defaultWindows: Record<WindowId, Omit<WindowState, 'isOpen' | 'isMinimized
     position: { x: 160, y: 130 },
     size: { width: 500, height: 400 },
   },
+  trash: {
+    id: 'trash',
+    title: 'trash/',
+    route: '/trash',
+    position: { x: 300, y: 150 },
+    size: { width: 500, height: 450 },
+  },
 };
 
 let maxZIndex = 0;

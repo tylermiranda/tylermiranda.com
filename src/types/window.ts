@@ -9,4 +9,4 @@ export interface WindowState {
   size: { width: number; height: number };
 }
 
-export type WindowId = 'about' | 'projects' | 'skills' | 'resume' | 'contact' | 'welcome';
+export type WindowId = 'about' | 'projects' | 'skills' | 'resume' | 'contact' | 'welcome' | 'trash';

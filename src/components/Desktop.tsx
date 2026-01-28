@@ -36,6 +36,11 @@ export function Desktop({ windowContents }: DesktopProps) {
         ))}
       </div>
 
+      {/* Trash Icon - Bottom Right */}
+      <div className="absolute bottom-20 right-4">
+        <DesktopIcon id="trash" label="trash/" icon="🗑️" />
+      </div>
+
       {/* Windows */}
       {visibleWindows.map((win) => (
         <Window key={win.id} id={win.id as WindowId}>
