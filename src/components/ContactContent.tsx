@@ -20,9 +20,9 @@ export function ContactContent() {
           <span>echo $EMAIL</span>
         </div>
         <div className="pl-4 flex items-center gap-2">
-          <span className="text-amber-400">tyler@example.com</span>
+          <span className="text-amber-400">tyler.miranda@gmail.com</span>
           <button
-            onClick={() => copyToClipboard('tyler@example.com', 'email')}
+            onClick={() => copyToClipboard('tyler.miranda@gmail.com', 'email')}
             className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
           >
             {copied === 'email' ? '✓ copied!' : '[copy]'}
@@ -31,36 +31,36 @@ export function ContactContent() {
 
         <div className="flex items-center gap-2 mt-4">
           <span className="text-gray-400">$</span>
-          <span>open $GITHUB</span>
+          <span>open $LINKEDIN</span>
         </div>
         <div className="pl-4">
           <a
-            href="https://github.com/tylermiranda"
+            href="https://www.linkedin.com/in/tyler-miranda-pro/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:underline"
           >
-            github.com/tylermiranda →
+            linkedin.com/in/tyler-miranda-pro →
           </a>
         </div>
 
         <div className="flex items-center gap-2 mt-4">
           <span className="text-gray-400">$</span>
-          <span>open $LINKEDIN</span>
+          <span>open $RESUME</span>
         </div>
         <div className="pl-4">
           <a
-            href="https://linkedin.com/in/tylermiranda"
+            href="https://docs.google.com/document/d/18HLUyYZaaRRvGUiA7XVZnfgjbHsR5C62/edit?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:underline"
           >
-            linkedin.com/in/tylermiranda →
+            Google Docs Resume →
           </a>
         </div>
 
         <div className="mt-6 text-gray-500">
-          <span className="text-gray-400">$</span> # DMs always open 👋
+          <span className="text-gray-400">$</span> # Open to opportunities 👋
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const terminalLines = [
-  { prompt: '> whoami', response: 'Tyler Miranda - Software Engineer' },
+  { prompt: '> whoami', response: 'Tyler Miranda - Senior VDI Platform Engineer' },
   { prompt: '> cat welcome.txt', response: "Hey! Welcome to my corner of the internet.\nClick around to explore my work, skills, and how to reach me." },
 ];
 

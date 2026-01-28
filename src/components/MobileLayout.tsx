@@ -28,7 +28,7 @@ export function MobileLayout({ windowContents }: MobileLayoutProps) {
       <div className="p-4">
         <div className="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg">
           <div className="text-gray-400">{`> whoami`}</div>
-          <div>Tyler Miranda - Software Engineer</div>
+          <div>Tyler Miranda - Senior VDI Platform Engineer</div>
           <div className="text-gray-400 mt-2">{`> cat welcome.txt`}</div>
           <div className="text-green-400">
             Hey! Welcome to my corner of the internet.
@@ -57,16 +57,7 @@ export function MobileLayout({ windowContents }: MobileLayoutProps) {
       {/* Bottom Nav */}
       <nav className="fixed bottom-0 left-0 right-0 bg-cream-dark/90 backdrop-blur-sm border-t border-gray-200 px-4 py-2 flex justify-around">
         <a
-          href="https://github.com/tylermiranda"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-col items-center text-xs text-gray-600"
-        >
-          <span className="text-lg">🐙</span>
-          GitHub
-        </a>
-        <a
-          href="https://linkedin.com/in/tylermiranda"
+          href="https://www.linkedin.com/in/tyler-miranda-pro/"
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center text-xs text-gray-600"
@@ -75,11 +66,20 @@ export function MobileLayout({ windowContents }: MobileLayoutProps) {
           LinkedIn
         </a>
         <a
-          href="mailto:tyler@example.com"
+          href="mailto:tyler.miranda@gmail.com"
           className="flex flex-col items-center text-xs text-gray-600"
         >
           <span className="text-lg">✉️</span>
           Email
+        </a>
+        <a
+          href="https://docs.google.com/document/d/18HLUyYZaaRRvGUiA7XVZnfgjbHsR5C62/edit?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center text-xs text-gray-600"
+        >
+          <span className="text-lg">📄</span>
+          Resume
         </a>
       </nav>
     </div>

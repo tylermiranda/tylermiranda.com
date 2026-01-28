@@ -9,46 +9,47 @@ export function AboutContent() {
         </div>
         <div>
           <h1 className="text-xl font-bold text-gray-900">Tyler Miranda</h1>
-          <p className="text-gray-600">Software Engineer</p>
-          <p className="text-gray-500 text-xs mt-1">📍 Location TBD</p>
+          <p className="text-gray-600">Senior VDI Platform Engineer</p>
+          <p className="text-gray-500 text-xs mt-1">📍 Remote</p>
         </div>
       </div>
 
       <div className="space-y-4 text-gray-700">
         <p>
-          Hey! I'm Tyler, a software engineer who builds things for the web.
+          Senior Citrix Engineer with 15+ years designing, supporting, and optimizing
+          enterprise virtual desktop infrastructure (VDI) solutions.
         </p>
 
         <p>
-          I love creating tools that make developers' lives easier and
-          products that users actually enjoy using.
+          Expert in Citrix DaaS, NetScaler Gateway, and Azure VDI environments, with
+          deep scripting experience using PowerShell and REST APIs. Architect of
+          internal platforms that reduce support overhead by bridging gaps in Citrix
+          and Azure interfaces.
         </p>
 
         <div className="bg-cream p-3 rounded border border-gray-200">
-          <div className="text-gray-500 text-xs mb-1">// Currently interested in</div>
+          <div className="text-gray-500 text-xs mb-1">// Currently focused on</div>
           <ul className="list-disc list-inside space-y-1">
-            <li>Building delightful user experiences</li>
-            <li>Developer tooling</li>
-            <li>Making complex things simple</li>
+            <li>End-to-end automation & performance engineering</li>
+            <li>AI-powered tooling with Azure OpenAI</li>
+            <li>Secure, scalable EUC solutions</li>
           </ul>
         </div>
 
         <div className="flex gap-2 pt-2">
           <a
-            href="https://github.com/tylermiranda"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-3 py-1.5 bg-gray-900 text-white rounded text-xs hover:bg-gray-800 transition-colors"
-          >
-            GitHub →
-          </a>
-          <a
-            href="https://linkedin.com/in/tylermiranda"
+            href="https://www.linkedin.com/in/tyler-miranda-pro/"
             target="_blank"
             rel="noopener noreferrer"
             className="px-3 py-1.5 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 transition-colors"
           >
             LinkedIn →
+          </a>
+          <a
+            href="mailto:tyler.miranda@gmail.com"
+            className="px-3 py-1.5 bg-gray-900 text-white rounded text-xs hover:bg-gray-800 transition-colors"
+          >
+            Email →
           </a>
         </div>
       </div>

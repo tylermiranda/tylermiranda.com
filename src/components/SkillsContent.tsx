@@ -1,8 +1,9 @@
 const skills = {
-  languages: ['TypeScript', 'JavaScript', 'Python', 'Go', 'SQL'],
-  frameworks: ['React', 'Next.js', 'Astro', 'Node.js', 'FastAPI'],
-  tools: ['Git', 'Docker', 'AWS', 'PostgreSQL', 'Redis'],
-  practices: ['TDD', 'CI/CD', 'Code Review', 'Agile'],
+  virtualization: ['Citrix DaaS', 'Citrix XenDesktop', 'Citrix XenApp', 'Azure VDI', 'VMware vSphere'],
+  networking: ['NetScaler Gateway', 'Citrix ADC', 'GSLB', 'ICA Proxy'],
+  automation: ['PowerShell', 'REST APIs', 'Jenkins CI', 'Python'],
+  cloud: ['Azure', 'Azure OpenAI', 'Citrix Cloud', 'Microsoft 365'],
+  tools: ['ControlUp', 'FsLogix', 'Splunk', 'ServiceNow', 'Citrix WEM'],
 };
 
 export function SkillsContent() {
@@ -23,8 +24,8 @@ export function SkillsContent() {
               <span key={item}>
                 {'    '}<span className="text-green-400">"{item}"</span>
                 {j < items.length - 1 && <span className="text-gray-500">,</span>}
-                {j === 0 && category === 'languages' && (
-                  <span className="text-gray-600"> // yes I actually enjoy TS</span>
+                {j === 0 && category === 'automation' && (
+                  <span className="text-gray-600"> // 15+ years of scripting</span>
                 )}
                 {'\n'}
               </span>

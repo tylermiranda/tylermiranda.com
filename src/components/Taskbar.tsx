@@ -57,22 +57,20 @@ export function Taskbar() {
       {/* System tray */}
       <div className="flex items-center gap-3">
         <a
-          href="https://github.com/tylermiranda"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:scale-110 transition-transform"
-          aria-label="GitHub"
-        >
-          <span className="text-lg">🐙</span>
-        </a>
-        <a
-          href="https://linkedin.com/in/tylermiranda"
+          href="https://www.linkedin.com/in/tyler-miranda-pro/"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:scale-110 transition-transform"
           aria-label="LinkedIn"
         >
           <span className="text-lg">💼</span>
+        </a>
+        <a
+          href="mailto:tyler.miranda@gmail.com"
+          className="hover:scale-110 transition-transform"
+          aria-label="Email"
+        >
+          <span className="text-lg">✉️</span>
         </a>
         <div className="w-px h-6 bg-gray-300" />
         <span className="text-sm font-mono text-gray-700">{formatTime(time)}</span>
