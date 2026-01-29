@@ -59,7 +59,7 @@ export const windows = atom<Record<WindowId, WindowState>>(
   Object.fromEntries(
     Object.entries(defaultWindows).map(([key, value]) => [
       key,
-      { ...value, isOpen: false, isMinimized: false, zIndex: 0 },
+      { ...value, isOpen: false, isMinimized: false, isMaximized: false, zIndex: 0 },
     ])
   ) as Record<WindowId, WindowState>
 );
@@ -120,4 +120,36 @@ export function updateWindowSize(id: WindowId, size: { width: number; height: nu
     ...current,
     [id]: { ...current[id], size },
   });
+}
+
+export function toggleMaximize(id: WindowId) {
+  const current = windows.get();
+  const win = current[id];
+
+  if (win.isMaximized) {
+    // Restore to previous size/position
+    const prev = win.preMaximizeState;
+    windows.set({
+      ...current,
+      [id]: {
+        ...win,
+        isMaximized: false,
+        position: prev?.position ?? win.position,
+        size: prev?.size ?? win.size,
+        preMaximizeState: undefined,
+      },
+    });
+  } else {
+    // Save current state and maximize
+    windows.set({
+      ...current,
+      [id]: {
+        ...win,
+        isMaximized: true,
+        preMaximizeState: { position: win.position, size: win.size },
+        position: { x: 0, y: 0 },
+        size: { width: window.innerWidth, height: window.innerHeight - 48 }, // 48px for taskbar
+      },
+    });
+  }
 }

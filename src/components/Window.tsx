@@ -7,6 +7,7 @@ import {
   focusWindow,
   updateWindowPosition,
   updateWindowSize,
+  toggleMaximize,
 } from '../stores/windows';
 import type { WindowId } from '../types/window';
 
@@ -30,6 +31,7 @@ export function Window({ id, children }: WindowProps) {
     (e: MouseEvent<HTMLDivElement>) => {
       if ((e.target as HTMLElement).closest('[data-window-controls]')) return;
       if ((e.target as HTMLElement).closest('[data-resize-handle]')) return;
+      if (windowState.isMaximized) return; // Don't allow dragging when maximized
 
       focusWindow(id);
       setIsDragging(true);
@@ -93,7 +95,9 @@ export function Window({ id, children }: WindowProps) {
   return (
     <div
       ref={windowRef}
-      className="absolute bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col"
+      className={`absolute bg-white shadow-2xl overflow-hidden flex flex-col ${
+        windowState.isMaximized ? '' : 'rounded-lg'
+      }`}
       style={{
         left: windowState.position.x,
         top: windowState.position.y,
@@ -105,8 +109,8 @@ export function Window({ id, children }: WindowProps) {
     >
       {/* Title Bar */}
       <div
-        className={`flex items-center justify-between px-4 py-2 bg-cream-dark border-b border-gray-200 cursor-grab ${
-          isDragging ? 'cursor-grabbing' : ''
+        className={`flex items-center justify-between px-4 py-2 bg-cream-dark border-b border-gray-200 ${
+          windowState.isMaximized ? 'cursor-default' : isDragging ? 'cursor-grabbing' : 'cursor-grab'
         }`}
         onMouseDown={handleMouseDown}
       >
@@ -122,7 +126,7 @@ export function Window({ id, children }: WindowProps) {
             aria-label="Minimize window"
           />
           <button
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); toggleMaximize(id); }}
             className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors"
             aria-label="Maximize window"
           />
@@ -136,22 +140,24 @@ export function Window({ id, children }: WindowProps) {
       {/* Content */}
       <div className="flex-1 overflow-auto p-4">{children}</div>
 
-      {/* Resize Handle - Bottom Right Corner */}
-      <div
-        data-resize-handle
-        className={`absolute bottom-0 right-0 w-4 h-4 cursor-se-resize ${
-          isResizing ? 'bg-blue-200' : ''
-        }`}
-        onMouseDown={handleResizeMouseDown}
-      >
-        <svg
-          className="w-4 h-4 text-gray-400"
-          viewBox="0 0 16 16"
-          fill="currentColor"
+      {/* Resize Handle - Bottom Right Corner (hidden when maximized) */}
+      {!windowState.isMaximized && (
+        <div
+          data-resize-handle
+          className={`absolute bottom-0 right-0 w-4 h-4 cursor-se-resize ${
+            isResizing ? 'bg-blue-200' : ''
+          }`}
+          onMouseDown={handleResizeMouseDown}
         >
-          <path d="M14 14H12V12H14V14ZM14 10H12V8H14V10ZM10 14H8V12H10V14Z" />
-        </svg>
-      </div>
+          <svg
+            className="w-4 h-4 text-gray-400"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+          >
+            <path d="M14 14H12V12H14V14ZM14 10H12V8H14V10ZM10 14H8V12H10V14Z" />
+          </svg>
+        </div>
+      )}
     </div>
   );
 }
