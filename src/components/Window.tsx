@@ -112,16 +112,17 @@ export function Window({ id, children }: WindowProps) {
       >
         <div className="flex items-center gap-2" data-window-controls>
           <button
-            onClick={() => closeWindow(id)}
+            onClick={(e) => { e.stopPropagation(); closeWindow(id); }}
             className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
             aria-label="Close window"
           />
           <button
-            onClick={() => minimizeWindow(id)}
+            onClick={(e) => { e.stopPropagation(); minimizeWindow(id); }}
             className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors"
             aria-label="Minimize window"
           />
           <button
+            onClick={(e) => e.stopPropagation()}
             className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors"
             aria-label="Maximize window"
           />
