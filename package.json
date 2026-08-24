@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && wrangler pages deploy dist"
+    "deploy": "npm run build && wrangler pages deploy dist --project-name=tylermiranda --commit-dirty=true"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.5",
