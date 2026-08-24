@@ -11,4 +11,12 @@ export interface WindowState {
   preMaximizeState?: { position: { x: number; y: number }; size: { width: number; height: number } };
 }
 
-export type WindowId = 'about' | 'projects' | 'skills' | 'resume' | 'contact' | 'welcome' | 'trash';
+export type WindowId =
+  | 'about'
+  | 'projects'
+  | 'work-log'
+  | 'skills'
+  | 'resume'
+  | 'contact'
+  | 'welcome'
+  | 'trash';

@@ -9,6 +9,7 @@ const windows: Array<{ id: WindowId; label: string; icon: string }> = [
   { id: 'welcome', label: 'Terminal', icon: '🖥️' },
   { id: 'about', label: 'About', icon: '📄' },
   { id: 'projects', label: 'Projects', icon: '📁' },
+  { id: 'work-log', label: 'Work Log', icon: '🧾' },
   { id: 'skills', label: 'Skills', icon: '📋' },
   { id: 'resume', label: 'Resume', icon: '📑' },
   { id: 'contact', label: 'Contact', icon: '💻' },

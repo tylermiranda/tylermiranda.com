@@ -23,6 +23,13 @@ const defaultWindows: Record<WindowId, Omit<WindowState, 'isOpen' | 'isMinimized
     position: { x: 260, y: 80 },
     size: { width: 900, height: 550 },
   },
+  'work-log': {
+    id: 'work-log',
+    title: 'work.log',
+    route: '/work-log',
+    position: { x: 220, y: 60 },
+    size: { width: 920, height: 600 },
+  },
   skills: {
     id: 'skills',
     title: 'skills.json',

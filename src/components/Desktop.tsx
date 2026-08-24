@@ -13,6 +13,7 @@ interface DesktopProps {
 const icons: Array<{ id: WindowId; label: string; icon: string }> = [
   { id: 'about', label: 'about.txt', icon: '📄' },
   { id: 'projects', label: 'projects/', icon: '📁' },
+  { id: 'work-log', label: 'work.log', icon: '🧾' },
   { id: 'skills', label: 'skills.json', icon: '📋' },
   { id: 'resume', label: 'resume.pdf', icon: '📑' },
   { id: 'contact', label: 'contact.sh', icon: '💻' },

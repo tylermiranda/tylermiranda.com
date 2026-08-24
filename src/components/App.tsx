@@ -3,6 +3,7 @@ import { MobileLayout } from './MobileLayout';
 import { WelcomeTerminal } from './WelcomeTerminal';
 import { AboutContent } from './AboutContent';
 import { ProjectsContent } from './ProjectsContent';
+import { WorkLogContent } from './WorkLogContent';
 import { SkillsContent } from './SkillsContent';
 import { ResumeContent } from './ResumeContent';
 import { ContactContent } from './ContactContent';
@@ -13,6 +14,7 @@ const windowContents: Record<WindowId, React.ReactNode> = {
   welcome: <WelcomeTerminal />,
   about: <AboutContent />,
   projects: <ProjectsContent />,
+  'work-log': <WorkLogContent />,
   skills: <SkillsContent />,
   resume: <ResumeContent />,
   contact: <ContactContent />,

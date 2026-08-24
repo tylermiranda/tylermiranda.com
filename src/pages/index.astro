@@ -3,6 +3,90 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { App } from '../components/App';
 ---
 
-<BaseLayout title="TylerOS | Tyler Miranda">
+<BaseLayout>
+  <!-- SEO-friendly content visible to crawlers and screen readers -->
+  <div class="sr-only">
+    <header>
+      <h1>Tyler Miranda - Senior VDI Platform Engineer</h1>
+      <p>Senior Citrix Engineer with 15+ years designing, supporting, and optimizing enterprise virtual desktop infrastructure (VDI) solutions.</p>
+    </header>
+
+    <main>
+      <section aria-label="About">
+        <h2>About Tyler Miranda</h2>
+        <p>Expert in Citrix DaaS, NetScaler Gateway, and Azure VDI environments, with deep scripting experience using PowerShell and REST APIs. Architect of internal platforms that reduce support overhead by bridging gaps in Citrix and Azure interfaces.</p>
+        <p>Currently focused on: End-to-end automation & performance engineering, AI-powered tooling with Azure OpenAI, and secure, scalable EUC solutions.</p>
+      </section>
+
+      <section aria-label="Skills">
+        <h2>Technical Skills</h2>
+        <h3>Virtualization</h3>
+        <ul>
+          <li>Citrix DaaS</li>
+          <li>Citrix XenDesktop</li>
+          <li>Citrix XenApp</li>
+          <li>Azure VDI</li>
+          <li>VMware vSphere</li>
+        </ul>
+        <h3>Networking</h3>
+        <ul>
+          <li>NetScaler Gateway</li>
+          <li>Citrix ADC</li>
+          <li>GSLB</li>
+          <li>ICA Proxy</li>
+        </ul>
+        <h3>Automation</h3>
+        <ul>
+          <li>PowerShell (15+ years)</li>
+          <li>REST APIs</li>
+          <li>Jenkins CI</li>
+          <li>Python</li>
+        </ul>
+        <h3>Cloud</h3>
+        <ul>
+          <li>Azure</li>
+          <li>Azure OpenAI</li>
+          <li>Citrix Cloud</li>
+          <li>Microsoft 365</li>
+        </ul>
+      </section>
+
+      <section aria-label="Projects">
+        <h2>Projects</h2>
+        <article>
+          <h3>OptiStack</h3>
+          <p>Self-hosted supplement & medication manager for biohackers. AI-powered interaction analysis, smart inventory tracking, timing schedules, and doctor-ready PDF reports.</p>
+        </article>
+        <article>
+          <h3>SplitRowr</h3>
+          <p>iOS companion app for Concept2 rowers with retro LCD aesthetics. Real-time metrics, Ghost Pacer for racing previous performances, Apple Health & Strava sync.</p>
+        </article>
+        <article>
+          <h3>Hooli Phone</h3>
+          <p>Parody landing page for the revolutionary Hooli Phone running Nucleus OS.</p>
+        </article>
+      </section>
+
+      <section aria-label="Contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:tyler.miranda@gmail.com">tyler.miranda@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/tyler-miranda-pro/">linkedin.com/in/tyler-miranda-pro</a></p>
+      </section>
+    </main>
+  </div>
+
+  <!-- Interactive app for visual users -->
   <App client:load />
+
+  <!-- Fallback for JavaScript-disabled browsers -->
+  <noscript>
+    <div style="padding: 2rem; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
+      <h1>Tyler Miranda - Senior VDI Platform Engineer</h1>
+      <p>Senior Citrix Engineer with 15+ years designing, supporting, and optimizing enterprise virtual desktop infrastructure (VDI) solutions.</p>
+      <p>Please enable JavaScript to experience the interactive version of this portfolio.</p>
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:tyler.miranda@gmail.com">tyler.miranda@gmail.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/tyler-miranda-pro/">linkedin.com/in/tyler-miranda-pro</a></p>
+    </div>
+  </noscript>
 </BaseLayout>

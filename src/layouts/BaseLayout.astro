@@ -1,9 +1,17 @@
 ---
 interface Props {
   title?: string;
+  description?: string;
+  image?: string;
 }
 
-const { title = 'TylerOS' } = Astro.props;
+const {
+  title = 'TylerOS | Tyler Miranda - Senior VDI Platform Engineer',
+  description = 'Tyler Miranda is a Senior Citrix Engineer with 15+ years designing enterprise VDI solutions. Expert in Citrix DaaS, NetScaler Gateway, Azure VDI, PowerShell automation, and AI-powered tooling.',
+  image = '/tyler_adult.jpeg'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -11,10 +19,86 @@ const { title = 'TylerOS' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Tyler Miranda - Senior VDI Platform Engineer" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Primary Meta Tags -->
     <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Tyler Miranda" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Keywords (still used by some search engines) -->
+    <meta name="keywords" content="Tyler Miranda, VDI Engineer, Citrix DaaS, NetScaler, Azure VDI, PowerShell, Platform Engineer, Citrix Consultant, End User Computing" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:site_name" content="Tyler Miranda" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- JSON-LD Structured Data for Person -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Tyler Miranda",
+      "url": "https://tylermiranda.com",
+      "image": "https://tylermiranda.com/tyler_adult.jpeg",
+      "jobTitle": "Senior VDI Platform Engineer",
+      "description": "Senior Citrix Engineer with 15+ years designing, supporting, and optimizing enterprise virtual desktop infrastructure (VDI) solutions.",
+      "knowsAbout": [
+        "Citrix DaaS",
+        "Citrix XenDesktop",
+        "NetScaler Gateway",
+        "Azure VDI",
+        "PowerShell",
+        "REST APIs",
+        "Azure OpenAI",
+        "VMware vSphere"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/tyler-miranda-pro/",
+        "https://github.com/tylermiranda"
+      ],
+      "email": "mailto:tyler.miranda@gmail.com",
+      "alumniOf": {
+        "@type": "Organization",
+        "name": "Technology Industry"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Available for Opportunities"
+      }
+    })} />
+
+    <!-- WebSite Schema for Site Search -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Tyler Miranda - VDI Platform Engineer",
+      "url": "https://tylermiranda.com",
+      "description": "Personal portfolio of Tyler Miranda, Senior VDI Platform Engineer specializing in Citrix and Azure solutions."
+    })} />
   </head>
   <body>
     <slot />

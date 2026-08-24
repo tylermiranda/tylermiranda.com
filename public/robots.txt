@@ -1,0 +1,6 @@
+# robots.txt for tylermiranda.com
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://tylermiranda.com/sitemap-index.xml

@@ -38,6 +38,7 @@ export function Taskbar() {
   const menuItems: Array<{ id: WindowId; label: string; icon: string }> = [
     { id: 'about', label: 'About Me', icon: '📄' },
     { id: 'projects', label: 'Projects', icon: '📁' },
+    { id: 'work-log', label: 'Work Log', icon: '🧾' },
     { id: 'skills', label: 'Skills', icon: '📋' },
     { id: 'resume', label: 'Resume', icon: '📑' },
     { id: 'contact', label: 'Contact', icon: '💻' },
