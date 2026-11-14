@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { workLog } from '../content/workLog';
 import { getCollection } from 'astro:content';
 
-const posts = await getCollection('blog');
+const posts = await getCollection('blog', ({ data }) => !data.draft);
 const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
 ---
 
@@ -31,9 +30,6 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
           </a>
           <a href="#writing" class="text-zinc-400 hover:text-white transition-colors hidden sm:inline">
             Writing
-          </a>
-          <a href="#work-log" class="text-zinc-400 hover:text-white transition-colors hidden md:inline">
-            Work Log
           </a>
           <a href="https://github.com/tylermiranda" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors">
             GitHub
@@ -77,7 +73,7 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
           </h1>
 
           <p class="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl">
-            Designing and supporting enterprise-scale virtual desktop infrastructure, Windows 365 Cloud PC automation, and zero-trust networks by day. Building serverless edge applications on Cloudflare Workers, Model Context Protocol (MCP) tooling, and native Swift apps by night.
+            Designing and supporting enterprise-scale virtual desktop infrastructure, Windows 365 Cloud PC automation, and Microsoft Entra ID access policies by day. Building serverless edge applications on Cloudflare Workers, Model Context Protocol (MCP) tooling, and native Swift apps by night.
           </p>
 
           <div class="flex flex-wrap items-center gap-3 pt-2">
@@ -193,24 +189,24 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
               <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-amber-500/30 bg-amber-500/10 text-amber-400 font-medium">
                 SECURITY ARCHITECTURE
               </span>
-              <span class="text-xs font-mono text-zinc-500">ZTNA &amp; Access</span>
+              <span class="text-xs font-mono text-zinc-500">Identity &amp; Access</span>
             </div>
 
             <div>
-              <h3 class="text-lg font-semibold text-white tracking-tight">Zero-Trust Migrations &amp; Entra ID Governance</h3>
-              <p class="text-xs font-mono text-zinc-400 mt-0.5">Secure Application Access Without Legacy VPNs</p>
+              <h3 class="text-lg font-semibold text-white tracking-tight">Enterprise Identity &amp; Conditional Access</h3>
+              <p class="text-xs font-mono text-zinc-400 mt-0.5">Secure Application Access &amp; Compliance</p>
             </div>
 
             <p class="text-sm text-zinc-300 leading-relaxed">
-              Planning and executing enterprise zero-trust migrations from legacy VPN and Zscaler (ZIA/ZPA) stacks to Cloudflare One. Formulating granular conditional access policies, device posture enforcement, and Entra ID governance to secure remote workforce connectivity with zero performance friction.
+              Designing and enforcing robust identity governance, single sign-on (SSO), and granular Conditional Access policies across Microsoft Entra ID. Aligning endpoint compliance, multi-factor authentication (MFA), and secure application delivery to safeguard enterprise workloads without impacting user productivity.
             </p>
 
             <div class="flex flex-wrap gap-1.5 pt-2">
-              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Zero Trust (ZTNA)</span>
-              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Cloudflare One</span>
-              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Zscaler Migration</span>
               <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Microsoft Entra ID</span>
               <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Conditional Access</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Intune Compliance</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">SSO &amp; MFA</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Identity Governance</span>
             </div>
           </div>
 
@@ -363,10 +359,7 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
                 <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 font-medium">
                   HOMELAB &amp; PWA
                 </span>
-                <a href="/posts/open-source-whispersync" class="text-xs font-mono text-emerald-400 hover:text-emerald-300 flex items-center gap-1">
-                  <span>Read Postmortem</span>
-                  <span>&rarr;</span>
-                </a>
+                <span class="text-xs font-mono text-zinc-500">Postmortem Incoming</span>
               </div>
 
               <div>
@@ -404,70 +397,56 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
           <span class="text-xs font-mono text-zinc-500">03 // WRITING</span>
         </div>
 
-        <div class="space-y-4">
-          {sortedPosts.map((post) => (
-            <a href={`/posts/${post.id}`} class="block rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 hover:border-zinc-700 transition-all duration-200 group shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-zinc-500 mb-2">
-                <div class="flex items-center gap-2">
-                  <span class="text-zinc-400">{post.data.publishDate}</span>
-                  <span>•</span>
-                  <span>{post.data.readTime}</span>
+        {sortedPosts.length > 0 ? (
+          <div class="space-y-4">
+            {sortedPosts.map((post) => (
+              <a href={`/posts/${post.id}`} class="block rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 hover:border-zinc-700 transition-all duration-200 group shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-zinc-500 mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="text-zinc-400">{post.data.publishDate}</span>
+                    <span>•</span>
+                    <span>{post.data.readTime}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    {post.data.tags.slice(0, 3).map((tag: string) => (
+                      <span class="px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-400">#{tag}</span>
+                    ))}
+                  </div>
                 </div>
-                <div class="flex items-center gap-1.5">
-                  {post.data.tags.slice(0, 3).map((tag: string) => (
-                    <span class="px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-400">#{tag}</span>
-                  ))}
-                </div>
-              </div>
 
-              <h3 class="text-xl font-semibold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
-                {post.data.title}
-              </h3>
+                <h3 class="text-xl font-semibold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
+                  {post.data.title}
+                </h3>
 
-              <p class="text-sm text-zinc-400 mt-2 leading-relaxed">
-                {post.data.description}
-              </p>
-
-              <div class="mt-4 flex items-center gap-1 text-xs font-mono text-emerald-400 group-hover:translate-x-1 transition-transform">
-                <span>Read article</span>
-                <span>&rarr;</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <!-- Work Log Feed (Automated PKM Pipeline) -->
-      <section id="work-log" class="space-y-6">
-        <div class="flex items-center justify-between pb-3 border-b border-zinc-800/80">
-          <div>
-            <h2 class="text-xl font-semibold tracking-tight text-white">Running Engineering Changelog</h2>
-            <p class="text-xs font-mono text-zinc-400 mt-0.5">Live work feed synchronized from personal knowledge base</p>
-          </div>
-          <span class="text-xs font-mono text-zinc-500">04 // CHANGELOG</span>
-        </div>
-
-        <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6 space-y-6">
-          <div class="divide-y divide-zinc-800/60">
-            {workLog.slice(0, 6).map((entry) => (
-              <div class="py-3 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6">
-                <time class="text-xs font-mono text-emerald-400/90 sm:w-28 shrink-0 pt-0.5">
-                  {entry.date}
-                </time>
-                <p class="text-sm text-zinc-300 leading-relaxed">
-                  {entry.text}
+                <p class="text-sm text-zinc-400 mt-2 leading-relaxed">
+                  {post.data.description}
                 </p>
-              </div>
+
+                <div class="mt-4 flex items-center gap-1 text-xs font-mono text-emerald-400 group-hover:translate-x-1 transition-transform">
+                  <span>Read article</span>
+                  <span>&rarr;</span>
+                </div>
+              </a>
             ))}
           </div>
-        </div>
+        ) : (
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-8 text-center space-y-3">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-zinc-800 bg-zinc-900/60 text-xs font-mono text-zinc-400">
+              <span class="text-emerald-400 font-bold">&gt;</span> First Deep Dive Publishing Tomorrow
+            </div>
+            <h3 class="text-lg font-semibold text-white tracking-tight">The Day My E-Reader Erased 200 Pages</h3>
+            <p class="text-sm text-zinc-400 max-w-lg mx-auto leading-relaxed">
+              How a 900ms distributed systems race condition in self-hosted reading sync taught me to enforce strict backend monotonicity across e-ink and web clients.
+            </p>
+          </div>
+        )}
       </section>
 
       <!-- Connect Section -->
       <section class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-8 text-center space-y-4">
         <h2 class="text-2xl font-semibold tracking-tight text-white">Building or scaling platform engineering?</h2>
         <p class="text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed">
-          Open to technical leadership, senior platform engineering roles, and advisory discussions on enterprise virtual desktop platforms, zero-trust migrations, and edge AI systems.
+          Open to technical leadership, senior platform engineering roles, and advisory discussions on enterprise virtual desktop platforms, digital workplace architecture, and edge AI systems.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
           <a href="mailto:tyler.miranda@gmail.com" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs font-mono transition-colors">
@@ -496,8 +475,6 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
           <a href="#systems" class="hover:text-zinc-300 transition-colors">Systems</a>
           <span>•</span>
           <a href="#writing" class="hover:text-zinc-300 transition-colors">Field Notes</a>
-          <span>•</span>
-          <a href="#work-log" class="hover:text-zinc-300 transition-colors">Work Log</a>
         </div>
       </div>
     </footer>
