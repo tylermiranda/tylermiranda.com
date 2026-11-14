@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { App } from '../components/App';
+---
+
+<BaseLayout 
+  title="TylerOS Desktop Simulator | Tyler Miranda"
+  description="Interactive retro desktop operating system simulator built with Astro, React, and Tailwind."
+  bodyClass="tyleros-mode"
+>
+  <!-- Return to Modern Portfolio Banner -->
+  <div class="fixed top-2 left-2 z-50 flex items-center gap-2 bg-stone-900/90 text-stone-100 px-3 py-1.5 rounded border border-stone-700 text-xs font-mono shadow-md backdrop-blur">
+    <a href="/" class="hover:text-amber-400 transition-colors flex items-center gap-1 font-semibold">
+      <span>&larr;</span> Back to Modern Portfolio
+    </a>
+    <span class="text-stone-500">|</span>
+    <span class="text-stone-400">TylerOS Simulator</span>
+  </div>
+
+  <!-- Interactive app for visual users -->
+  <App client:load />
+
+  <!-- Fallback for JavaScript-disabled browsers -->
+  <noscript>
+    <div style="padding: 2rem; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; color: #1c1917;">
+      <h1>TylerOS Desktop Simulator</h1>
+      <p>Please enable JavaScript to experience the interactive retro desktop version of this portfolio.</p>
+      <p><a href="/">&larr; Return to Standard View</a></p>
+    </div>
+  </noscript>
+</BaseLayout>

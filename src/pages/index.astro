@@ -1,92 +1,366 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { App } from '../components/App';
+import { workLog } from '../content/workLog';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
 ---
 
 <BaseLayout>
-  <!-- SEO-friendly content visible to crawlers and screen readers -->
-  <div class="sr-only">
-    <header>
-      <h1>Tyler Miranda - Senior VDI Platform Engineer</h1>
-      <p>Senior Citrix Engineer with 15+ years designing, supporting, and optimizing enterprise virtual desktop infrastructure (VDI) solutions.</p>
+  <div class="min-h-screen bg-[#09090b] text-zinc-100 flex flex-col selection:bg-zinc-800 selection:text-emerald-400">
+    <!-- Navigation Bar (shadcn-inspired sticky blur bar) -->
+    <header class="sticky top-0 z-50 border-b border-zinc-800/80 bg-[#09090b]/80 backdrop-blur-md">
+      <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <a href="/" class="font-semibold tracking-tight text-white hover:text-emerald-400 transition-colors flex items-center gap-2">
+            <span>Tyler Miranda</span>
+          </a>
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Shipping Edge Systems</span>
+          </span>
+        </div>
+
+        <nav class="flex items-center gap-5 text-xs font-mono">
+          <a href="#systems" class="text-zinc-400 hover:text-white transition-colors hidden sm:inline">
+            Systems
+          </a>
+          <a href="#writing" class="text-zinc-400 hover:text-white transition-colors hidden sm:inline">
+            Writing
+          </a>
+          <a href="#work-log" class="text-zinc-400 hover:text-white transition-colors hidden md:inline">
+            Work Log
+          </a>
+          <a href="https://github.com/tylermiranda" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors">
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/tyler-miranda-pro/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors">
+            LinkedIn
+          </a>
+          <a href="/os" class="px-2.5 py-1 rounded border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 shadow-sm">
+            <span>TylerOS</span>
+            <span class="text-amber-500 font-sans">💾</span>
+          </a>
+        </nav>
+      </div>
     </header>
 
-    <main>
-      <section aria-label="About">
-        <h2>About Tyler Miranda</h2>
-        <p>Expert in Citrix DaaS, NetScaler Gateway, and Azure VDI environments, with deep scripting experience using PowerShell and REST APIs. Architect of internal platforms that reduce support overhead by bridging gaps in Citrix and Azure interfaces.</p>
-        <p>Currently focused on: End-to-end automation & performance engineering, AI-powered tooling with Azure OpenAI, and secure, scalable EUC solutions.</p>
+    <!-- Main Content -->
+    <main class="flex-1 max-w-6xl mx-auto px-6 py-12 md:py-16 w-full space-y-20">
+      
+      <!-- Hero Section -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-zinc-800 bg-zinc-900/50 text-xs font-mono text-zinc-400">
+            <span class="text-emerald-400 font-bold">&gt;</span> Senior Platform Engineer & AI Systems Builder
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white leading-none">
+            Architecting resilient platforms. Shipping edge & AI software.
+          </h1>
+
+          <p class="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl">
+            Designing enterprise digital workplace systems, Cloud PC fleet automation, and zero-trust networks by day. Building serverless edge applications on Cloudflare Workers, Model Context Protocol (MCP) tooling, and native Swift clients by night.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="#writing" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs font-mono transition-colors shadow-sm">
+              Read Field Notes &rarr;
+            </a>
+            <a href="#systems" class="px-4 py-2 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 hover:bg-zinc-900 text-zinc-300 hover:text-white font-mono text-xs transition-colors">
+              Explore Systems &darr;
+            </a>
+            <a href="https://www.linkedin.com/in/tyler-miranda-pro/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 hover:bg-zinc-900 text-zinc-300 hover:text-white font-mono text-xs transition-colors flex items-center gap-1.5">
+              <span>Connect on LinkedIn</span>
+              <span class="text-zinc-500">&nearr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Metric Telemetry Grid (Rootly / Stripe Style) -->
+        <div class="lg:col-span-5 grid grid-cols-2 gap-3 pt-2">
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-zinc-700/80 transition-colors">
+            <div class="text-3xl font-semibold tracking-tight text-white font-mono">15+</div>
+            <div class="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-wider">Enterprise Years</div>
+            <div class="text-xs text-zinc-500 mt-2 leading-snug">VDI, Cloud PC, Entra ID & Zero-Trust Architecture</div>
+          </div>
+
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-zinc-700/80 transition-colors">
+            <div class="text-3xl font-semibold tracking-tight text-emerald-400 font-mono">&lt;800ms</div>
+            <div class="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-wider">Legal Exhibits</div>
+            <div class="text-xs text-zinc-500 mt-2 leading-snug">Deterministic tax appeal generation on Cloudflare</div>
+          </div>
+
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-zinc-700/80 transition-colors">
+            <div class="text-3xl font-semibold tracking-tight text-white font-mono">20+</div>
+            <div class="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-wider">Autonomous Agents</div>
+            <div class="text-xs text-zinc-500 mt-2 leading-snug">Multi-agent developer swarms coordinated via MCP</div>
+          </div>
+
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-zinc-700/80 transition-colors">
+            <div class="text-3xl font-semibold tracking-tight text-emerald-400 font-mono">Sub-ms</div>
+            <div class="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-wider">BM25 Retrieval</div>
+            <div class="text-xs text-zinc-500 mt-2 leading-snug">Centralized SQLite FTS5 agent memory engine</div>
+          </div>
+        </div>
       </section>
 
-      <section aria-label="Skills">
-        <h2>Technical Skills</h2>
-        <h3>Virtualization</h3>
-        <ul>
-          <li>Citrix DaaS</li>
-          <li>Citrix XenDesktop</li>
-          <li>Citrix XenApp</li>
-          <li>Azure VDI</li>
-          <li>VMware vSphere</li>
-        </ul>
-        <h3>Networking</h3>
-        <ul>
-          <li>NetScaler Gateway</li>
-          <li>Citrix ADC</li>
-          <li>GSLB</li>
-          <li>ICA Proxy</li>
-        </ul>
-        <h3>Automation</h3>
-        <ul>
-          <li>PowerShell (15+ years)</li>
-          <li>REST APIs</li>
-          <li>Jenkins CI</li>
-          <li>Python</li>
-        </ul>
-        <h3>Cloud</h3>
-        <ul>
-          <li>Azure</li>
-          <li>Azure OpenAI</li>
-          <li>Citrix Cloud</li>
-          <li>Microsoft 365</li>
-        </ul>
+      <!-- Featured Systems Section -->
+      <section id="systems" class="space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-zinc-800/80">
+          <div>
+            <h2 class="text-xl font-semibold tracking-tight text-white">Featured Systems & Software</h2>
+            <p class="text-xs font-mono text-zinc-400 mt-0.5">Original production architectures, serverless platforms, and native clients</p>
+          </div>
+          <span class="text-xs font-mono text-zinc-500">01 // SYSTEMS</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- TaxDispute.app -->
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 flex flex-col justify-between hover:border-zinc-700 transition-all duration-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-amber-500/30 bg-amber-500/10 text-amber-400 font-medium">
+                  LAUNCHING EARLY 2027
+                </span>
+                <span class="text-xs font-mono text-zinc-500">&lt;800ms compilation</span>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-semibold text-white tracking-tight group-hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+                  <span>TaxDispute.app</span>
+                </h3>
+                <p class="text-xs font-mono text-zinc-400 mt-0.5">Automated Property-Tax Appeal Engine</p>
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed">
+                Full-stack serverless platform turning complex county parcel valuation data into code-generated, deterministic legal hearing exhibits. Features client-side vector GIS maps, local regex/LLM parcel extraction, and Stripe webhook workflows.
+              </p>
+            </div>
+
+            <div class="pt-6 space-y-3">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Cloudflare Workers</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Hono</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">React</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">D1 (SQLite)</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">R2</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">MapLibre GL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Self-Hosted Agent Memory & MCP Server -->
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 flex flex-col justify-between hover:border-zinc-700 transition-all duration-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-medium">
+                  PRODUCTION SYSTEM
+                </span>
+                <span class="text-xs font-mono text-zinc-500">24/7 Engine</span>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-semibold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
+                  Self-Hosted Agent Memory (MCP)
+                </h3>
+                <p class="text-xs font-mono text-zinc-400 mt-0.5">Centralized Model Context Protocol Memory</p>
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed">
+                Custom Docker-hosted Model Context Protocol server powered by SQLite WAL + FTS5 (BM25) indexing. Coordinates unified project context, atomic work capture, and cross-harness session history across 20+ specialized autonomous agents without cloud vendor lock-in.
+              </p>
+            </div>
+
+            <div class="pt-6 space-y-3">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">MCP Protocol</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">SQLite FTS5</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Docker</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Python</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Tailscale</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SplitRowr -->
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 flex flex-col justify-between hover:border-zinc-700 transition-all duration-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 font-medium">
+                  SHIPPED APP
+                </span>
+                <a href="https://splitrowr.app" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-zinc-400 hover:text-white flex items-center gap-1">
+                  <span>splitrowr.app</span>
+                  <span>&nearr;</span>
+                </a>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-semibold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
+                  SplitRowr
+                </h3>
+                <p class="text-xs font-mono text-zinc-400 mt-0.5">Native iOS Concept2 Ergometer Companion</p>
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed">
+                Native iOS app interfacing directly with Concept2 PM5 monitors over CoreBluetooth FTMS. Delivers real-time stroke telemetry, Ghost Pacer pacing against previous efforts, and Apple HealthKit integration with strict Swift 6 concurrency.
+              </p>
+            </div>
+
+            <div class="pt-6 space-y-3">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Swift 6</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">SwiftUI</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">CoreBluetooth FTMS</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">HealthKit</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bookworm -->
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 flex flex-col justify-between hover:border-zinc-700 transition-all duration-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 font-medium">
+                  HOMELAB &amp; PWA
+                </span>
+                <a href="/posts/open-source-whispersync" class="text-xs font-mono text-emerald-400 hover:text-emerald-300 flex items-center gap-1">
+                  <span>Read Postmortem</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-semibold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
+                  Bookworm (Whispersync OSS)
+                </h3>
+                <p class="text-xs font-mono text-zinc-400 mt-0.5">Private E-Reader Sync & Reading Intelligence</p>
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed">
+                Self-hosted reading synchronization stack linking Kobo e-ink hardware (KOReader/ZenOS) to an offline-first iPhone PWA. Solves asynchronous multi-client race conditions through strict server-side monotonicity enforcement.
+              </p>
+            </div>
+
+            <div class="pt-6 space-y-3">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Offline PWA</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">IndexedDB</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Node.js</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">SQLite</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">KOReader KOSync</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section aria-label="Projects">
-        <h2>Projects</h2>
-        <article>
-          <h3>OptiStack</h3>
-          <p>Self-hosted supplement & medication manager for biohackers. AI-powered interaction analysis, smart inventory tracking, timing schedules, and doctor-ready PDF reports.</p>
-        </article>
-        <article>
-          <h3>SplitRowr</h3>
-          <p>iOS companion app for Concept2 rowers with retro LCD aesthetics. Real-time metrics, Ghost Pacer for racing previous performances, Apple Health & Strava sync.</p>
-        </article>
-        <article>
-          <h3>Hooli Phone</h3>
-          <p>Parody landing page for the revolutionary Hooli Phone running Nucleus OS.</p>
-        </article>
+      <!-- Field Notes / Writing Section -->
+      <section id="writing" class="space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-zinc-800/80">
+          <div>
+            <h2 class="text-xl font-semibold tracking-tight text-white">Field Notes &amp; Writing</h2>
+            <p class="text-xs font-mono text-zinc-400 mt-0.5">Engineering postmortems, architecture tradeoffs, and systems war stories</p>
+          </div>
+          <span class="text-xs font-mono text-zinc-500">02 // WRITING</span>
+        </div>
+
+        <div class="space-y-4">
+          {sortedPosts.map((post) => (
+            <a href={`/posts/${post.id}`} class="block rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 hover:border-zinc-700 transition-all duration-200 group">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-zinc-500 mb-2">
+                <div class="flex items-center gap-2">
+                  <span class="text-zinc-400">{post.data.publishDate}</span>
+                  <span>•</span>
+                  <span>{post.data.readTime}</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  {post.data.tags.slice(0, 3).map((tag: string) => (
+                    <span class="px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-400">#{tag}</span>
+                  ))}
+                </div>
+              </div>
+
+              <h3 class="text-xl font-semibold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
+                {post.data.title}
+              </h3>
+
+              <p class="text-sm text-zinc-400 mt-2 leading-relaxed">
+                {post.data.description}
+              </p>
+
+              <div class="mt-4 flex items-center gap-1 text-xs font-mono text-emerald-400 group-hover:translate-x-1 transition-transform">
+                <span>Read article</span>
+                <span>&rarr;</span>
+              </div>
+            </a>
+          ))}
+        </div>
       </section>
 
-      <section aria-label="Contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:tyler.miranda@gmail.com">tyler.miranda@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/tyler-miranda-pro/">linkedin.com/in/tyler-miranda-pro</a></p>
+      <!-- Work Log Feed (Automated PKM Pipeline) -->
+      <section id="work-log" class="space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-zinc-800/80">
+          <div>
+            <h2 class="text-xl font-semibold tracking-tight text-white">Running Engineering Changelog</h2>
+            <p class="text-xs font-mono text-zinc-400 mt-0.5">Live work feed synchronized from personal knowledge base</p>
+          </div>
+          <span class="text-xs font-mono text-zinc-500">03 // CHANGELOG</span>
+        </div>
+
+        <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6 space-y-6">
+          <div class="divide-y divide-zinc-800/60">
+            {workLog.slice(0, 6).map((entry) => (
+              <div class="py-3 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6">
+                <time class="text-xs font-mono text-emerald-400/90 sm:w-28 shrink-0 pt-0.5">
+                  {entry.date}
+                </time>
+                <p class="text-sm text-zinc-300 leading-relaxed">
+                  {entry.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Connect Section -->
+      <section class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-8 text-center space-y-4">
+        <h2 class="text-2xl font-semibold tracking-tight text-white">Building or scaling platform engineering?</h2>
+        <p class="text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed">
+          Open to technical leadership, principal platform engineering roles, and advisory discussions on edge AI systems and enterprise workplace infrastructure.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <a href="mailto:tyler.miranda@gmail.com" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs font-mono transition-colors">
+            tyler.miranda@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/tyler-miranda-pro/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white font-mono text-xs transition-colors">
+            LinkedIn Profile
+          </a>
+          <a href="/os" class="px-4 py-2 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white font-mono text-xs transition-colors flex items-center gap-1.5">
+            <span>Launch TylerOS Desktop</span>
+            <span class="text-amber-500 font-sans">💾</span>
+          </a>
+        </div>
       </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800/80 py-8 text-center text-xs text-zinc-500 font-mono">
+      <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>&copy; {new Date().getFullYear()} Tyler Miranda. Built with Astro &amp; Tailwind.</div>
+        <div class="flex items-center gap-4">
+          <a href="/os" class="hover:text-zinc-300 transition-colors">TylerOS Simulator</a>
+          <span>•</span>
+          <a href="#systems" class="hover:text-zinc-300 transition-colors">Systems</a>
+          <span>•</span>
+          <a href="#writing" class="hover:text-zinc-300 transition-colors">Field Notes</a>
+          <span>•</span>
+          <a href="#work-log" class="hover:text-zinc-300 transition-colors">Work Log</a>
+        </div>
+      </div>
+    </footer>
   </div>
-
-  <!-- Interactive app for visual users -->
-  <App client:load />
-
-  <!-- Fallback for JavaScript-disabled browsers -->
-  <noscript>
-    <div style="padding: 2rem; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
-      <h1>Tyler Miranda - Senior VDI Platform Engineer</h1>
-      <p>Senior Citrix Engineer with 15+ years designing, supporting, and optimizing enterprise virtual desktop infrastructure (VDI) solutions.</p>
-      <p>Please enable JavaScript to experience the interactive version of this portfolio.</p>
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:tyler.miranda@gmail.com">tyler.miranda@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/tyler-miranda-pro/">linkedin.com/in/tyler-miranda-pro</a></p>
-    </div>
-  </noscript>
 </BaseLayout>

@@ -3,12 +3,14 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  bodyClass?: string;
 }
 
 const {
-  title = 'TylerOS | Tyler Miranda - Senior VDI Platform Engineer',
-  description = 'Tyler Miranda is a Senior Citrix Engineer with 15+ years designing enterprise VDI solutions. Expert in Citrix DaaS, NetScaler Gateway, Azure VDI, PowerShell automation, and AI-powered tooling.',
-  image = '/tyler_adult.jpeg'
+  title = 'Tyler Miranda | Senior Platform Engineer & AI Systems Builder',
+  description = 'Senior Platform Engineer architecting enterprise digital workplace platforms, Cloud PC & zero-trust infrastructure, and building full-stack edge AI applications, Model Context Protocol (MCP) tooling, and native Swift apps.',
+  image = '/tyler_adult.jpeg',
+  bodyClass = ''
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -27,9 +29,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="author" content="Tyler Miranda" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL} />
-
-    <!-- Keywords (still used by some search engines) -->
-    <meta name="keywords" content="Tyler Miranda, VDI Engineer, Citrix DaaS, NetScaler, Azure VDI, PowerShell, Platform Engineer, Citrix Consultant, End User Computing" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -64,50 +63,39 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "name": "Tyler Miranda",
       "url": "https://tylermiranda.com",
       "image": "https://tylermiranda.com/tyler_adult.jpeg",
-      "jobTitle": "Senior VDI Platform Engineer",
-      "description": "Senior Citrix Engineer with 15+ years designing, supporting, and optimizing enterprise virtual desktop infrastructure (VDI) solutions.",
+      "jobTitle": "Senior Platform Engineer",
+      "description": "Senior Platform Engineer with 15+ years designing enterprise digital workplace systems, Cloud PC automation, and building full-stack edge AI applications and MCP infrastructure.",
       "knowsAbout": [
-        "Citrix DaaS",
-        "Citrix XenDesktop",
-        "NetScaler Gateway",
-        "Azure VDI",
-        "PowerShell",
-        "REST APIs",
-        "Azure OpenAI",
-        "VMware vSphere"
+        "Cloudflare Workers",
+        "Model Context Protocol (MCP)",
+        "SwiftUI & Swift 6",
+        "Docker & Containerization",
+        "SQLite & FTS5 BM25",
+        "Windows 365 Cloud PC",
+        "Microsoft Intune & Entra ID",
+        "Zero Trust Architecture",
+        "PowerShell & Python"
       ],
       "sameAs": [
         "https://www.linkedin.com/in/tyler-miranda-pro/",
         "https://github.com/tylermiranda"
       ],
-      "email": "mailto:tyler.miranda@gmail.com",
-      "alumniOf": {
-        "@type": "Organization",
-        "name": "Technology Industry"
-      },
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Available for Opportunities"
-      }
+      "email": "mailto:tyler.miranda@gmail.com"
     })} />
 
     <!-- WebSite Schema for Site Search -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Tyler Miranda - VDI Platform Engineer",
+      "name": "Tyler Miranda - Senior Platform Engineer",
       "url": "https://tylermiranda.com",
-      "description": "Personal portfolio of Tyler Miranda, Senior VDI Platform Engineer specializing in Citrix and Azure solutions."
+      "description": "Personal engineering portfolio and field notes of Tyler Miranda, Senior Platform Engineer & AI Systems Builder."
     })} />
   </head>
-  <body>
+  <body class={bodyClass}>
     <slot />
   </body>
 </html>
-
-<script>
-  document.addEventListener('contextmenu', (e) => e.preventDefault());
-</script>
 
 <style is:global>
   @import '../styles/global.css';
