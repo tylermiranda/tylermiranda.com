@@ -1,0 +1,149 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: string;
+  author?: string;
+  tags?: string[];
+  ogImage?: string;
+  readTime?: string;
+}
+
+const {
+  title,
+  description,
+  publishDate,
+  author = 'Tyler Miranda',
+  tags = [],
+  ogImage = '/tyler_adult.jpeg',
+  readTime = '4 min read'
+} = Astro.props;
+---
+
+<BaseLayout title={`${title} | Tyler Miranda`} description={description} image={ogImage}>
+  <div class="min-h-screen bg-[#09090b] text-zinc-100 flex flex-col selection:bg-zinc-800 selection:text-emerald-400">
+    <!-- Header / Nav -->
+    <header class="sticky top-0 z-50 border-b border-zinc-800/80 bg-[#09090b]/80 backdrop-blur-md">
+      <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div class="flex items-center gap-3 text-sm">
+          <a href="/" class="font-medium text-zinc-300 hover:text-white transition-colors">
+            Tyler Miranda
+          </a>
+          <span class="text-zinc-600">/</span>
+          <span class="text-zinc-400 font-mono text-xs">Field Notes</span>
+        </div>
+
+        <div class="flex items-center gap-4 text-xs font-mono">
+          <a href="/#systems" class="text-zinc-400 hover:text-zinc-200 transition-colors hidden sm:inline">
+            Systems
+          </a>
+          <a href="/#writing" class="text-zinc-400 hover:text-zinc-200 transition-colors hidden sm:inline">
+            Writing
+          </a>
+          <a href="/os" class="px-2.5 py-1 rounded border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 shadow-sm">
+            <span>TylerOS</span>
+            <span class="text-amber-500 font-sans">💾</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-4xl mx-auto px-6 py-12 w-full">
+      <!-- Article Header -->
+      <header class="mb-10 pb-8 border-b border-zinc-800/80">
+        <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-zinc-400 mb-4">
+          <time datetime={publishDate} class="text-zinc-400">
+            {publishDate}
+          </time>
+          <span class="text-zinc-700">•</span>
+          <span>{readTime}</span>
+          <span class="text-zinc-700">•</span>
+          <span>By {author}</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-lg text-zinc-400 leading-relaxed max-w-3xl mb-6">
+          {description}
+        </p>
+
+        {tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 pt-2">
+            {tags.map((tag) => (
+              <span class="text-xs font-mono px-2 py-0.5 rounded border border-zinc-800/80 bg-zinc-900/40 text-zinc-300">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <!-- Markdown Body -->
+      <article class="prose prose-invert prose-zinc max-w-none 
+        prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-zinc-100
+        prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-zinc-800/60 prose-h2:pb-2
+        prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+        prose-p:text-zinc-300 prose-p:leading-relaxed prose-p:text-base
+        prose-a:text-emerald-400 hover:prose-a:text-emerald-300 prose-a:no-underline hover:prose-a:underline
+        prose-code:text-emerald-300 prose-code:font-mono prose-code:bg-zinc-900/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:border prose-code:border-zinc-800/60 prose-code:before:content-none prose-code:after:content-none
+        prose-pre:border prose-pre:border-zinc-800 prose-pre:bg-zinc-900/90 prose-pre:p-4 prose-pre:rounded-xl prose-pre:shadow-sm
+        prose-blockquote:border-l-2 prose-blockquote:border-emerald-500/60 prose-blockquote:bg-zinc-900/30 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r prose-blockquote:text-zinc-300 prose-blockquote:not-italic
+        prose-img:rounded-xl prose-img:border prose-img:border-zinc-800 prose-img:shadow-md prose-img:my-8
+        prose-ul:list-disc prose-ol:list-decimal prose-li:text-zinc-300
+        prose-hr:border-zinc-800/80 prose-hr:my-10">
+        <slot />
+      </article>
+
+      <!-- Author Card Footer -->
+      <footer class="mt-16 pt-10 border-t border-zinc-800/80">
+        <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div class="flex items-center gap-4">
+            <img 
+              src="/images/tyler.jpg" 
+              alt="Tyler Miranda" 
+              class="w-12 h-12 rounded-full object-cover border border-zinc-700 ring-2 ring-zinc-800 shrink-0"
+            />
+            <div class="space-y-0.5">
+              <h3 class="font-semibold text-white text-base">Tyler Miranda</h3>
+              <p class="text-xs text-zinc-400 max-w-md">
+                Senior Platform Engineer &amp; AI Systems Builder. 15+ years enterprise VDI &amp; zero-trust by day, full-stack edge systems by night.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <a href="https://github.com/tylermiranda" target="_blank" rel="noopener noreferrer" 
+               class="px-3 py-1.5 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-xs font-mono text-zinc-300 transition-colors">
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/tyler-miranda-pro/" target="_blank" rel="noopener noreferrer"
+               class="px-3 py-1.5 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-xs font-mono text-zinc-300 transition-colors">
+              LinkedIn
+            </a>
+            <a href="/" class="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs font-mono transition-colors">
+              &larr; Portfolio
+            </a>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="border-t border-zinc-800/80 py-8 text-center text-xs text-zinc-500 font-mono">
+      <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>&copy; {new Date().getFullYear()} Tyler Miranda. All rights reserved.</div>
+        <div class="flex items-center gap-4">
+          <a href="/os" class="hover:text-zinc-300 transition-colors">TylerOS Simulator</a>
+          <span>•</span>
+          <a href="/#writing" class="hover:text-zinc-300 transition-colors">Field Notes</a>
+          <span>•</span>
+          <a href="/#systems" class="hover:text-zinc-300 transition-colors">Systems</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</BaseLayout>
