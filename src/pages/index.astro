@@ -7,7 +7,7 @@ const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
 ---
 
-<BaseLayout>
+<BaseLayout image="/images/tyler.jpg">
   <div class="min-h-screen bg-[#09090b] text-zinc-100 flex flex-col selection:bg-zinc-800 selection:text-emerald-400">
     <!-- Navigation Bar (shadcn-inspired sticky blur bar) -->
     <header class="sticky top-0 z-50 border-b border-zinc-800/80 bg-[#09090b]/80 backdrop-blur-md">
@@ -23,6 +23,9 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
         </div>
 
         <nav class="flex items-center gap-5 text-xs font-mono">
+          <a href="#vdi" class="text-zinc-400 hover:text-white transition-colors hidden sm:inline">
+            Enterprise VDI
+          </a>
           <a href="#systems" class="text-zinc-400 hover:text-white transition-colors hidden sm:inline">
             Systems
           </a>
@@ -49,30 +52,43 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
     <!-- Main Content -->
     <main class="flex-1 max-w-6xl mx-auto px-6 py-12 md:py-16 w-full space-y-20">
       
-      <!-- Hero Section -->
-      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <!-- Hero Section with Photo -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-zinc-800 bg-zinc-900/50 text-xs font-mono text-zinc-400">
-            <span class="text-emerald-400 font-bold">&gt;</span> Senior Platform Engineer & AI Systems Builder
+          <div class="flex items-center gap-4">
+            <img 
+              src="/images/tyler.jpg" 
+              alt="Tyler Miranda" 
+              class="w-14 h-14 rounded-full object-cover border border-zinc-700/80 shadow-sm ring-2 ring-zinc-800 shrink-0"
+            />
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-2">
+                <h2 class="text-xl sm:text-2xl font-semibold text-white tracking-tight">Tyler Miranda</h2>
+                <span class="inline-flex items-center px-2 py-0.5 rounded border border-zinc-800 bg-zinc-900/60 text-[11px] font-mono text-zinc-400">
+                  Senior Platform Engineer
+                </span>
+              </div>
+              <p class="text-xs font-mono text-zinc-400">Enterprise Digital Workplace &amp; AI Systems Builder</p>
+            </div>
           </div>
 
-          <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white leading-none">
-            Architecting resilient platforms. Shipping edge & AI software.
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white leading-tight">
+            15+ years architecting enterprise VDI platforms. Shipping modern edge &amp; AI software.
           </h1>
 
           <p class="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl">
-            Designing enterprise digital workplace systems, Cloud PC fleet automation, and zero-trust networks by day. Building serverless edge applications on Cloudflare Workers, Model Context Protocol (MCP) tooling, and native Swift clients by night.
+            Designing and supporting enterprise-scale virtual desktop infrastructure, Windows 365 Cloud PC automation, and zero-trust networks by day. Building serverless edge applications on Cloudflare Workers, Model Context Protocol (MCP) tooling, and native Swift apps by night.
           </p>
 
           <div class="flex flex-wrap items-center gap-3 pt-2">
-            <a href="#writing" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs font-mono transition-colors shadow-sm">
-              Read Field Notes &rarr;
+            <a href="#vdi" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs font-mono transition-colors shadow-sm">
+              Enterprise VDI Experience &darr;
             </a>
             <a href="#systems" class="px-4 py-2 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 hover:bg-zinc-900 text-zinc-300 hover:text-white font-mono text-xs transition-colors">
-              Explore Systems &darr;
+              Explore Shipping Systems
             </a>
             <a href="https://www.linkedin.com/in/tyler-miranda-pro/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 hover:bg-zinc-900 text-zinc-300 hover:text-white font-mono text-xs transition-colors flex items-center gap-1.5">
-              <span>Connect on LinkedIn</span>
+              <span>LinkedIn</span>
               <span class="text-zinc-500">&nearr;</span>
             </a>
           </div>
@@ -83,13 +99,13 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
           <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-zinc-700/80 transition-colors">
             <div class="text-3xl font-semibold tracking-tight text-white font-mono">15+</div>
             <div class="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-wider">Enterprise Years</div>
-            <div class="text-xs text-zinc-500 mt-2 leading-snug">VDI, Cloud PC, Entra ID & Zero-Trust Architecture</div>
+            <div class="text-xs text-zinc-500 mt-2 leading-snug">Citrix DaaS, Cloud PC, Entra ID &amp; NetScaler ADC</div>
           </div>
 
           <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-zinc-700/80 transition-colors">
             <div class="text-3xl font-semibold tracking-tight text-emerald-400 font-mono">&lt;800ms</div>
-            <div class="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-wider">Legal Exhibits</div>
-            <div class="text-xs text-zinc-500 mt-2 leading-snug">Deterministic tax appeal generation on Cloudflare</div>
+            <div class="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-wider">Tax Exhibits</div>
+            <div class="text-xs text-zinc-500 mt-2 leading-snug">TaxDispute.app deterministic code generation on Cloudflare</div>
           </div>
 
           <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-zinc-700/80 transition-colors">
@@ -106,14 +122,135 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
         </div>
       </section>
 
+      <!-- Enterprise VDI & Digital Workplace Section -->
+      <section id="vdi" class="space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-zinc-800/80">
+          <div>
+            <h2 class="text-xl font-semibold tracking-tight text-white">Enterprise Platform &amp; VDI Architecture</h2>
+            <p class="text-xs font-mono text-zinc-400 mt-0.5">15+ years designing, automating, and operating enterprise virtual desktop infrastructure</p>
+          </div>
+          <span class="text-xs font-mono text-zinc-500">01 // VDI &amp; EUC</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Citrix DaaS & NetScaler ADC -->
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 space-y-4 hover:border-zinc-700 transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-medium">
+                15+ YEARS SPECIALIZATION
+              </span>
+              <span class="text-xs font-mono text-zinc-500">Citrix DaaS / NetScaler</span>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-white tracking-tight">Citrix DaaS, XenDesktop &amp; NetScaler ADC</h3>
+              <p class="text-xs font-mono text-zinc-400 mt-0.5">Mission-Critical Enterprise Virtualization</p>
+            </div>
+
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              Deep architectural and operational experience designing and supporting high-concurrency Citrix virtual desktop environments. Engineering Global Server Load Balancing (GSLB), high-availability ICA proxy gateways, session policy optimization, and zero-downtime maintenance across geographically dispersed data centers.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Citrix DaaS</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">NetScaler Gateway</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">GSLB</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">ICA Proxy</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">VMware vSphere</span>
+            </div>
+          </div>
+
+          <!-- Windows 365 Cloud PC & Azure VDI -->
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 space-y-4 hover:border-zinc-700 transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 font-medium">
+                CLOUD PC &amp; AUTOMATION
+              </span>
+              <span class="text-xs font-mono text-zinc-500">Fleet Engineering</span>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-white tracking-tight">Windows 365 Cloud PC &amp; Azure Virtual Desktop</h3>
+              <p class="text-xs font-mono text-zinc-400 mt-0.5">Automated Endpoint Fleets &amp; User Experience</p>
+            </div>
+
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              Architecting cloud desktop solutions leveraging Windows 365 Cloud PC and Azure Virtual Desktop (AVD). Built custom WinUI 3 / WebView2 onboarding utilities, automated endpoint health validation, and Intune policy configurations that reduce operational ticket volume and accelerate worker provisioning.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Windows 365</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Azure VDI (AVD)</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Microsoft Intune</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">WinUI 3</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">WebView2</span>
+            </div>
+          </div>
+
+          <!-- Zero Trust & Network Migrations -->
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 space-y-4 hover:border-zinc-700 transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-amber-500/30 bg-amber-500/10 text-amber-400 font-medium">
+                SECURITY ARCHITECTURE
+              </span>
+              <span class="text-xs font-mono text-zinc-500">ZTNA &amp; Access</span>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-white tracking-tight">Zero-Trust Migrations &amp; Entra ID Governance</h3>
+              <p class="text-xs font-mono text-zinc-400 mt-0.5">Secure Application Access Without Legacy VPNs</p>
+            </div>
+
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              Planning and executing enterprise zero-trust migrations from legacy VPN and Zscaler (ZIA/ZPA) stacks to Cloudflare One. Formulating granular conditional access policies, device posture enforcement, and Entra ID governance to secure remote workforce connectivity with zero performance friction.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Zero Trust (ZTNA)</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Cloudflare One</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Zscaler Migration</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Microsoft Entra ID</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Conditional Access</span>
+            </div>
+          </div>
+
+          <!-- 15+ Years PowerShell & Automation -->
+          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 space-y-4 hover:border-zinc-700 transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 font-medium">
+                CORE TOOLING
+              </span>
+              <span class="text-xs font-mono text-zinc-500">15+ Years Code</span>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-white tracking-tight">PowerShell &amp; Enterprise REST Automation</h3>
+              <p class="text-xs font-mono text-zinc-400 mt-0.5">Automating Complex Operations at Scale</p>
+            </div>
+
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              15+ years engineering robust PowerShell automation modules, REST API wrappers, and CI/CD pipelines. Bridging gaps in vendor administrative consoles to automate provisioning, telemetry gathering, and operational self-healing across thousands of virtual endpoints.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">PowerShell (15+ yrs)</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">REST APIs</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Jenkins CI</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Python</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">JSON/YAML Ops</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Featured Systems Section -->
       <section id="systems" class="space-y-6">
         <div class="flex items-center justify-between pb-3 border-b border-zinc-800/80">
           <div>
-            <h2 class="text-xl font-semibold tracking-tight text-white">Featured Systems & Software</h2>
-            <p class="text-xs font-mono text-zinc-400 mt-0.5">Original production architectures, serverless platforms, and native clients</p>
+            <h2 class="text-xl font-semibold tracking-tight text-white">Original Shipping Systems &amp; Software</h2>
+            <p class="text-xs font-mono text-zinc-400 mt-0.5">Full-stack edge architectures, native mobile clients, and autonomous tooling</p>
           </div>
-          <span class="text-xs font-mono text-zinc-500">01 // SYSTEMS</span>
+          <span class="text-xs font-mono text-zinc-500">02 // SYSTEMS</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -236,7 +373,7 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
                 <h3 class="text-xl font-semibold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
                   Bookworm (Whispersync OSS)
                 </h3>
-                <p class="text-xs font-mono text-zinc-400 mt-0.5">Private E-Reader Sync & Reading Intelligence</p>
+                <p class="text-xs font-mono text-zinc-400 mt-0.5">Private E-Reader Sync &amp; Reading Intelligence</p>
               </div>
 
               <p class="text-sm text-zinc-300 leading-relaxed">
@@ -264,12 +401,12 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
             <h2 class="text-xl font-semibold tracking-tight text-white">Field Notes &amp; Writing</h2>
             <p class="text-xs font-mono text-zinc-400 mt-0.5">Engineering postmortems, architecture tradeoffs, and systems war stories</p>
           </div>
-          <span class="text-xs font-mono text-zinc-500">02 // WRITING</span>
+          <span class="text-xs font-mono text-zinc-500">03 // WRITING</span>
         </div>
 
         <div class="space-y-4">
           {sortedPosts.map((post) => (
-            <a href={`/posts/${post.id}`} class="block rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 hover:border-zinc-700 transition-all duration-200 group">
+            <a href={`/posts/${post.id}`} class="block rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 hover:border-zinc-700 transition-all duration-200 group shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-zinc-500 mb-2">
                 <div class="flex items-center gap-2">
                   <span class="text-zinc-400">{post.data.publishDate}</span>
@@ -307,7 +444,7 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
             <h2 class="text-xl font-semibold tracking-tight text-white">Running Engineering Changelog</h2>
             <p class="text-xs font-mono text-zinc-400 mt-0.5">Live work feed synchronized from personal knowledge base</p>
           </div>
-          <span class="text-xs font-mono text-zinc-500">03 // CHANGELOG</span>
+          <span class="text-xs font-mono text-zinc-500">04 // CHANGELOG</span>
         </div>
 
         <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6 space-y-6">
@@ -330,7 +467,7 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
       <section class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-8 text-center space-y-4">
         <h2 class="text-2xl font-semibold tracking-tight text-white">Building or scaling platform engineering?</h2>
         <p class="text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed">
-          Open to technical leadership, principal platform engineering roles, and advisory discussions on edge AI systems and enterprise workplace infrastructure.
+          Open to technical leadership, senior platform engineering roles, and advisory discussions on enterprise virtual desktop platforms, zero-trust migrations, and edge AI systems.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
           <a href="mailto:tyler.miranda@gmail.com" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs font-mono transition-colors">
@@ -353,6 +490,8 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
         <div>&copy; {new Date().getFullYear()} Tyler Miranda. Built with Astro &amp; Tailwind.</div>
         <div class="flex items-center gap-4">
           <a href="/os" class="hover:text-zinc-300 transition-colors">TylerOS Simulator</a>
+          <span>•</span>
+          <a href="#vdi" class="hover:text-zinc-300 transition-colors">Enterprise VDI</a>
           <span>•</span>
           <a href="#systems" class="hover:text-zinc-300 transition-colors">Systems</a>
           <span>•</span>
