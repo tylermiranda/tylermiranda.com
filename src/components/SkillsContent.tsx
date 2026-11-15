@@ -25,7 +25,7 @@ export function SkillsContent() {
                 {'    '}<span className="text-green-400">"{item}"</span>
                 {j < items.length - 1 && <span className="text-gray-500">,</span>}
                 {j === 0 && category === 'automation' && (
-                  <span className="text-gray-600"> // 15+ years of scripting</span>
+                  <span className="text-gray-600"> // 20+ years of scripting</span>
                 )}
                 {'\n'}
               </span>

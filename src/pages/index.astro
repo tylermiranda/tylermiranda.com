@@ -11,17 +11,17 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
     <!-- Navigation Bar (shadcn-inspired sticky blur bar) -->
     <header class="sticky top-0 z-50 border-b border-zinc-800/80 bg-[#09090b]/80 backdrop-blur-md">
       <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <a href="/" class="font-semibold tracking-tight text-white hover:text-emerald-400 transition-colors flex items-center gap-2">
+        <div class="flex items-center gap-3 min-w-0">
+          <a href="/" class="font-semibold tracking-tight text-white hover:text-emerald-400 transition-colors shrink-0">
             <span>Tyler Miranda</span>
           </a>
-          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="hidden md:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>Shipping Edge Systems</span>
           </span>
         </div>
 
-        <nav class="flex items-center gap-5 text-xs font-mono">
+        <nav class="flex items-center gap-3 sm:gap-5 text-xs font-mono shrink-0">
           <a href="#vdi" class="text-zinc-400 hover:text-white transition-colors hidden sm:inline">
             Enterprise VDI
           </a>
@@ -31,10 +31,10 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
           <a href="#writing" class="text-zinc-400 hover:text-white transition-colors hidden sm:inline">
             Writing
           </a>
-          <a href="https://github.com/tylermiranda" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors">
+          <a href="https://github.com/tylermiranda" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors hidden xs:inline">
             GitHub
           </a>
-          <a href="https://www.linkedin.com/in/tyler-miranda-pro/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors">
+          <a href="https://www.linkedin.com/in/tyler-miranda-pro/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors hidden xs:inline">
             LinkedIn
           </a>
           <a href="/os" class="px-2.5 py-1 rounded border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 shadow-sm">
@@ -69,7 +69,7 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
           </div>
 
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white leading-tight">
-            15+ years architecting enterprise VDI platforms. Shipping modern edge &amp; AI software.
+            20+ years in enterprise IT &amp; platform architecture. Shipping modern edge &amp; AI software.
           </h1>
 
           <p class="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl">
@@ -93,9 +93,9 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
         <!-- Metric Telemetry Grid (Rootly / Stripe Style) -->
         <div class="lg:col-span-5 grid grid-cols-2 gap-3 pt-2">
           <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-zinc-700/80 transition-colors">
-            <div class="text-3xl font-semibold tracking-tight text-white font-mono">15+</div>
-            <div class="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-wider">Enterprise Years</div>
-            <div class="text-xs text-zinc-500 mt-2 leading-snug">Citrix DaaS, Cloud PC, Entra ID &amp; NetScaler ADC</div>
+            <div class="text-3xl font-semibold tracking-tight text-white font-mono">20+</div>
+            <div class="text-xs font-mono text-zinc-400 mt-1 uppercase tracking-wider">Years in IT</div>
+            <div class="text-xs text-zinc-500 mt-2 leading-snug">Enterprise systems engineering &amp; platform architecture since 2005</div>
           </div>
 
           <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-zinc-700/80 transition-colors">
@@ -123,7 +123,7 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
         <div class="flex items-center justify-between pb-3 border-b border-zinc-800/80">
           <div>
             <h2 class="text-xl font-semibold tracking-tight text-white">Enterprise Platform &amp; VDI Architecture</h2>
-            <p class="text-xs font-mono text-zinc-400 mt-0.5">15+ years designing, automating, and operating enterprise virtual desktop infrastructure</p>
+            <p class="text-xs font-mono text-zinc-400 mt-0.5">20+ years designing, automating, and operating enterprise infrastructure and virtual desktops</p>
           </div>
           <span class="text-xs font-mono text-zinc-500">01 // VDI &amp; EUC</span>
         </div>
@@ -133,7 +133,7 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
           <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 space-y-4 hover:border-zinc-700 transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-medium">
-                15+ YEARS SPECIALIZATION
+                20+ YEARS SPECIALIZATION
               </span>
               <span class="text-xs font-mono text-zinc-500">Citrix DaaS / NetScaler</span>
             </div>
@@ -210,13 +210,13 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
             </div>
           </div>
 
-          <!-- 15+ Years PowerShell & Automation -->
+          <!-- 20+ Years PowerShell & Automation -->
           <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 space-y-4 hover:border-zinc-700 transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-mono px-2 py-0.5 rounded border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 font-medium">
                 CORE TOOLING
               </span>
-              <span class="text-xs font-mono text-zinc-500">15+ Years Code</span>
+              <span class="text-xs font-mono text-zinc-500">20+ Years Code</span>
             </div>
 
             <div>
@@ -225,11 +225,11 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() 
             </div>
 
             <p class="text-sm text-zinc-300 leading-relaxed">
-              15+ years engineering robust PowerShell automation modules, REST API wrappers, and CI/CD pipelines. Bridging gaps in vendor administrative consoles to automate provisioning, telemetry gathering, and operational self-healing across thousands of virtual endpoints.
+              20+ years engineering robust PowerShell automation modules, REST API wrappers, and CI/CD pipelines. Bridging gaps in vendor administrative consoles to automate provisioning, telemetry gathering, and operational self-healing across thousands of virtual endpoints.
             </p>
 
             <div class="flex flex-wrap gap-1.5 pt-2">
-              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">PowerShell (15+ yrs)</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">PowerShell (20+ yrs)</span>
               <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">REST APIs</span>
               <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Jenkins CI</span>
               <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/80 text-zinc-300">Python</span>

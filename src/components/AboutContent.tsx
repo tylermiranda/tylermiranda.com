@@ -16,7 +16,7 @@ export function AboutContent() {
 
       <div className="space-y-4 text-gray-700">
         <p>
-          Senior Citrix Engineer with 15+ years designing, supporting, and optimizing
+          Senior Platform Engineer with 20+ years designing, supporting, and optimizing
           enterprise virtual desktop infrastructure (VDI) solutions.
         </p>
 
