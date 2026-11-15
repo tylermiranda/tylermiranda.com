@@ -13,7 +13,9 @@ The single best feature of the Kindle ecosystem is not the hardware. It is Whisp
 
 You read a chapter on your phone while waiting in line for coffee, pick up your e-reader in bed that night, and find yourself right where you stopped.
 
-I like e-ink, but I try to keep my everyday tools out of walled gardens. Over the weekend, I decided to stitch together my own private reading sync stack across my phone and e-reader.
+I like e-ink, but I try to keep my everyday tools out of walled gardens. Five years ago, I would not have attempted to build a custom reading sync stack from scratch. Writing a custom sync server, reverse-engineering client lifecycle hooks, building an offline PWA with IndexedDB, and wiring it to an e-reader would have demanded weeks of tedious boilerplate. In the agentic AI era, that friction has vanished. I can hand the architecture and protocol constraints to an agent teammate, iterate through a few back-and-forth debugging rounds, and have working personal software that genuinely improves daily life.
+
+Over the weekend, that is exactly how I stitched together my own private reading intelligence and sync stack.
 
 ### The setup
 
@@ -93,12 +95,14 @@ One tap moves the reader directly to page 217.
 
 ---
 
-## What this setup provides
+## Personal software in the agentic era
 
-Building local tools gives you complete ownership of your data.
+Ultimately, this project is about something broader than reading sync: using AI to build personal software that fits your exact life.
 
-Every page turn on the phone and Kobo feeds back into a local SQLite database on my network. When I finish a book, a background script logs the streak and queries [StoryGraph](https://thestorygraph.com) and [Goodreads](https://www.goodreads.com) for related titles, keeping reading habits private.
+Building software just for yourself used to mean choosing between accepting commercial SaaS constraints or spending dozens of hours maintaining niche personal code. Now, when an off-the-shelf app falls short or locks data behind an unwanted ecosystem, you can pair with an AI agent to build a replacement tailored to how you actually live.
+
+Every page turn on my phone and Kobo feeds back into a local SQLite database on my network. When I finish a book, a background script logs the streak and queries [StoryGraph](https://thestorygraph.com) and [Goodreads](https://www.goodreads.com) for related titles, keeping reading habits private.
 
 ![Bookworm AI Recommendations View](/images/blog/bookworm-recommendations-view.png)
 
-If you are writing sync logic for e-ink or mobile devices, treat client events with suspicion. Hardware will fire lifecycle events unexpectedly, and clients will report stale state. Enforce monotonicity on the server so bad reads cannot destroy good data.
+If you are writing sync logic for e-ink or mobile devices, treat client events with suspicion. Hardware will fire lifecycle events unexpectedly, and clients will report stale state. Enforce monotonicity on the server so bad reads cannot destroy good data. And if you have been sitting on an idea for personal software that felt too small or tedious to build, try handing it to an agent.
