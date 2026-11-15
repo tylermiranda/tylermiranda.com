@@ -6,7 +6,7 @@ author: "Tyler Miranda"
 tags: ["Distributed Systems", "E-Ink", "SQLite", "Offline-First", "KOReader", "PWA"]
 ogImage: "/images/blog/bookworm-reading-dashboard.png"
 readTime: "5 min read"
-draft: true
+draft: false
 ---
 
 The single best feature of the Kindle ecosystem is not the hardware. It is Whispersync.
