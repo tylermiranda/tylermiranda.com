@@ -1,5 +1,5 @@
 ---
-title: "The Day My E-Reader Erased 200 Pages: Building an Open-Source 'Whispersync'"
+title: "The day my e-reader erased 200 pages: building an open-source 'Whispersync'"
 description: "How a 900ms distributed systems race condition in self-hosted reading sync taught me to enforce strict backend monotonicity across e-ink and web clients."
 publishDate: "2026-11-15"
 author: "Tyler Miranda"
@@ -9,62 +9,62 @@ readTime: "5 min read"
 draft: true
 ---
 
-The single best feature of the Kindle ecosystem isn't the hardware—it's Whispersync. 
+The single best feature of the Kindle ecosystem is not the hardware. It is Whispersync.
 
-You read a chapter on your phone while waiting in line for coffee, pick up your e-reader in bed that night, and you’re seamlessly right where you left off. 
+You read a chapter on your phone while waiting in line for coffee, pick up your e-reader in bed that night, and find yourself right where you stopped.
 
-I love e-ink, but I’m actively working to de-cloud my daily life and break away from locked-down vendor ecosystems. So over the weekend, I decided to build my own private, self-hosted reading intelligence and sync stack across my devices.
+I like e-ink, but I try to keep my everyday tools out of walled gardens. Over the weekend, I decided to stitch together my own private reading sync stack across my phone and e-reader.
 
-### The Stack
+### The setup
 
-- **E-Reader**: A Kobo Libra running [KOReader](https://github.com/koreader/koreader) with the slick [ZenOS](https://github.com/xZenLabs/zen-os) minimal UI overlay.
-- **Phone Reader**: An offline-first Progressive Web App (PWA) I built for my phone that caches books locally in IndexedDB and runs in true OLED black.
-- **Sync Backend**: A lightweight Node.js + SQLite service running 24/7 on my homelab that implements KOReader’s open [KOSync protocol](https://github.com/koreader/koreader/wiki/Sync-Plugin).
-- **The AI Teammate**: A local bot running on our homelab agent runtime that tracks reading velocity, builds GitHub-style reading heatmaps, and automatically surfaces book recommendations when a title is finished.
+- **E-reader:** A Kobo Libra running [KOReader](https://github.com/koreader/koreader) with the [ZenOS](https://github.com/xZenLabs/zen-os) minimal UI overlay.
+- **Phone reader:** An offline-first Progressive Web App (PWA) that caches books locally in IndexedDB with an OLED black theme.
+- **Sync backend:** A small Node.js and SQLite service running on my local network that implements KOReader's open [KOSync protocol](https://github.com/koreader/koreader/wiki/Sync-Plugin).
+- **Automation bot:** A local background script that logs reading sessions into SQLite, generates GitHub-style reading heatmaps, and suggests similar books once a title reaches 100%.
 
 ![Bookworm Reading Dashboard](/images/blog/bookworm-reading-dashboard.png)
 
-On paper, this felt like a straightforward afternoon project:
-1. Phone sends reading progress to the server.
-2. E-reader queries progress from the server.
-3. If phone progress > e-reader progress, prompt to jump ahead.
+On paper, the flow seemed simple enough:
 
-Then reality set in.
+1. The phone posts reading progress to the server.
+2. The e-reader asks the server for the current position.
+3. If the phone is ahead, the e-reader prompts to jump forward.
 
----
-
-## The Self-Inflicted Amnesia Loop
-
-I spent Saturday afternoon reading on my phone, knocked out about 200 pages (jumping from page 22 up to page 217 / 48%), and set the phone down.
-
-That night, I climbed into bed, opened the sleepcover on my Kobo, and waited for the magic prompt to jump to page 217.
-
-Nothing happened. 
-
-Worse: when I picked up my phone the next morning, my 200 pages of progress had completely vanished. The phone was back on page 22.
-
-Here is the wild distributed systems race condition that caused it:
-
-1. At `16:06:43`, my phone pushed reading progress to the server: **Page 217 (48.4%)**. Saved cleanly in SQLite.
-2. At `16:06:52`, I opened the book on my Kobo.
-3. In KOReader, opening a book triggers a quick document teardown under the hood (`ReaderUI:onClose`). 
-4. Earlier that day, I had hooked into that `onClose` event to automatically push progress whenever a book closed. But because the e-reader was just starting up, its local position was still sitting at **Page 22 (4.9%)** from yesterday.
-5. My server’s database query was a naive upsert: `ON CONFLICT DO UPDATE SET percentage = excluded.percentage`. It blindly trusted whatever device was talking.
-6. The server instantly overwrote my 48.4% phone progress with the stale 4.9% from the Kobo.
-7. One second later, the Kobo finished loading the document and queried the server: *"Hey, what’s my furthest location?"* The server handed back 4.9%. Because local and remote matched, the e-reader never prompted me.
-
-In 900 milliseconds, opening my e-reader had completely gaslit my entire reading stack.
+Then the hardware reminded me why distributed state is tricky.
 
 ---
 
-## The Fix: Monotonicity & E-Ink Patience
+## How the server erased my progress
 
-Fixing this required two architectural adjustments:
+On Saturday afternoon, I read through roughly 200 pages on my phone, moving from page 22 to page 217 (48% of the book), and put the phone down.
 
-### 1. Treat reading progress as a high-water mark (Monotonicity)
-Never trust client event ordering or assume clients are well-behaved. The sync server now enforces strict monotonicity: incoming progress must be strictly greater than or equal to what’s already on file. 
+That evening, I opened the sleepcover on the Kobo and waited for the prompt to jump to page 217.
 
-If an e-reader sends a lower percentage without an explicit override flag, the server logs a warning, drops the write, and preserves the furthest position:
+Nothing appeared.
+
+When I checked my phone the next morning, my progress was gone there too. The app had reverted to page 22.
+
+Here is what happened under the hood:
+
+1. At `16:06:43`, the phone pushed reading progress to the server: page 217 (48.4%). SQLite saved it immediately.
+2. At `16:06:52`, I opened the book on the Kobo.
+3. In KOReader, opening a document triggers an internal teardown callback (`ReaderUI:onClose`).
+4. Earlier that day, I had hooked into that `onClose` event to push reading progress whenever a reader closed a file. Because the Kobo was just loading the document, its in-memory position still held the stale state from Friday: page 22 (4.9%).
+5. The server query was a blind upsert: `ON CONFLICT DO UPDATE SET percentage = excluded.percentage`.
+6. The server immediately overwrote the 48.4% phone record with the 4.9% snapshot from the Kobo.
+7. A second later, the Kobo finished loading and asked the server for its furthest read point. The server returned 4.9%. Because the local and remote numbers matched, the e-reader never prompted to jump ahead.
+
+Within 900 milliseconds, opening the e-reader had rolled back my progress across every device.
+
+---
+
+## The fix: server monotonicity and reader timing
+
+Fixing the bug took two small changes.
+
+### 1. Enforce monotonicity on the server
+
+Clients will disconnect, crash, or send events out of order. The sync server cannot assume that the latest timestamp represents forward progress. Now the database treats progress as a high-water mark: incoming numbers must be greater than or equal to the existing value unless an explicit reset flag is provided.
 
 ```sql
 INSERT INTO progress (user_id, document_hash, progress_pct, updated_at)
@@ -77,24 +77,28 @@ ON CONFLICT(user_id, document_hash) DO UPDATE SET
   END;
 ```
 
-### 2. Give e-ink hardware time to breathe
-E-ink screens are slow to refresh. Firing network calls during document transitions is asking for race conditions. We ripped out the premature `onClose` push hook and gave the e-reader a 2-second grace period after the initial page paints before asking the server where it should be. 
+If an e-reader sends a lower percentage without an override, the server drops the update and preserves the higher number.
 
-Now, when the Kobo wakes up, it smoothly checks the server, notices the phone is 200 pages ahead, and pops up:  
-> *"You are on page 22 (4.9%). Furthest read location is page 217 (48.4%). Jump to furthest location?"*
+### 2. Delay sync queries until the document finishes rendering
 
-One tap, and you’re right there.
+E-ink controllers are slow compared to phones. Triggering network requests during UI redraws creates race conditions. I removed the `onClose` network hook and gave KOReader a two-second delay after initial render before querying the server.
+
+When the Kobo wakes up now, it renders the current page, checks the server, detects that the phone is 200 pages ahead, and shows a prompt:
+
+> "You are on page 22 (4.9%). Furthest read location is page 217 (48.4%). Jump to furthest location?"
+
+One tap moves the reader directly to page 217.
 
 ![Bookworm Reading Consistency Heatmap](/images/blog/bookworm-reading-heatmap.png)
 
 ---
 
-## Why Building Homelab Systems Beats Cloud Lock-In
+## What this setup provides
 
-Building physical hardware bridges is infinitely more rewarding than consuming proprietary subscription services. 
+Building local tools gives you complete ownership of your data.
 
-Now, every page turn on both devices feeds back into a local SQLite database that my local AI bot monitors. When I finish a book, it surfaces reading analytics, logs my reading streak, and runs an offline research job across [StoryGraph](https://thestorygraph.com) and [Goodreads](https://www.goodreads.com) to suggest what to read next—without sending a single byte of my reading habits to an ad broker.
+Every page turn on the phone and Kobo feeds back into a local SQLite database on my network. When I finish a book, a background script logs the streak and queries [StoryGraph](https://thestorygraph.com) and [Goodreads](https://www.goodreads.com) for related titles, keeping reading habits private.
 
 ![Bookworm AI Recommendations View](/images/blog/bookworm-recommendations-view.png)
 
-If you’re building local-first sync or hacking on e-ink devices, remember: your devices will fire lifecycle hooks when you least expect them, and they will lie about their state. Always enforce monotonicity on the backend.
+If you are writing sync logic for e-ink or mobile devices, treat client events with suspicion. Hardware will fire lifecycle events unexpectedly, and clients will report stale state. Enforce monotonicity on the server so bad reads cannot destroy good data.
