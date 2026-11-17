@@ -1,3 +1,4 @@
 name = "tylermiranda"
-compatibility_date = "2024-01-01"
+compatibility_date = "2026-01-28"
+compatibility_flags = ["nodejs_compat", "expose_global_message_channel"]
 pages_build_output_dir = "./dist"
